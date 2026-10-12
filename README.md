@@ -42,7 +42,7 @@ This repository hosts the source code for TOMATO, a dynamic food ordering websit
 Clone the project
 
 ```bash
-    git clone https://github.com/Srija132004/Food-Deliveryy-Tomato-App-.git
+    git clone https://github.com/Srija132004/Food-Delivery-Tomato-App-
 ```
 Go to the project directory
 
