@@ -6,7 +6,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  const url = import.meta.env.VITE_API_URL;
+  const url = "https://food-delivery-tomato-app.onrender.com";
   const [token, setToken] = useState("");
   const [food_list, setFoodList] = useState([]);
 
@@ -66,14 +66,25 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  const loadCardData = async (token) => {
+ const loadCardData = async (token) => {
+  try {
     const response = await axios.post(
       url + "/api/cart/get",
       {},
       { headers: { token } }
     );
-    setCartItems(response.data.cartData);
-  };
+
+    if (response.data && response.data.cartData) {
+      setCartItems(response.data.cartData);
+    } else {
+      setCartItems({});
+      console.error("Cart data is missing:", response.data);
+    }
+  } catch (error) {
+    console.error("Failed to load cart data:", error);
+    setCartItems({});
+  }
+};
 
   useEffect(() => {
     async function loadData() {
